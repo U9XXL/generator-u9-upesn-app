@@ -1,0 +1,17 @@
+{
+  "name": "<%= appId %>",
+  "version": "<%= appVersion %>",
+  "description": "<%= appName %>",
+  "main": "app.js",
+  "keywords": [
+    "U9移动应用",
+    "友空间",
+    "<%= appName %>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "~2.2.0",
+    "ionic": "~1.2.4",
+    "ionic-u9-upesn": "http://172.20.4.139:10101/r/libraries/ionic-u9-upesn.git"
+  }
+}
