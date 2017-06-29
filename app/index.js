@@ -83,6 +83,12 @@ module.exports = generators.Base.extend({
                     appName: this.appName
                 }
             );
+            this.fs.copyTpl(
+                this.templatePath('error.html'),
+                this.destinationPath('app/tpls/error.html'), {
+                    appName: this.appName
+                }
+            );
         },
         scripts: function() {
             this.fs.copyTpl(
@@ -94,6 +100,12 @@ module.exports = generators.Base.extend({
             this.fs.copyTpl(
                 this.templatePath('HomeCtrl.js'),
                 this.destinationPath('app/js/controllers/HomeCtrl.js'), {
+                    appId: this.appId
+                }
+            );
+            this.fs.copyTpl(
+                this.templatePath('ErrorCtrl.js'),
+                this.destinationPath('app/js/controllers/ErrorCtrl.js'), {
                     appId: this.appId
                 }
             );
@@ -110,11 +122,16 @@ module.exports = generators.Base.extend({
                 this.destinationPath('app/index.html')
             );
         },
+        img: function() {
+            this.fs.copy(
+                this.templatePath('error.png'),
+                this.destinationPath('app/img/error.png')
+            );
+        },
         misc: function() {
             mkdirp('app/js/directives');
             mkdirp('app/js/filters');
             mkdirp('app/js/services');
-            mkdirp('app/img');
         }
     },
 

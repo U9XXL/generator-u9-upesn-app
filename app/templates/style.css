@@ -1,4 +1,38 @@
 
 /**********************************************************Common******************************************************/
 
+.platform-preview .bar {
+    background-color: transparent;
+    border-bottom-width: 0;
+}
+@media not all, (-webkit-min-device-pixel-ratio: 1.5), not all, (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+    .platform-preview .bar {
+        background-image: none;
+    }
+}
+
 /**********************************************************Common******************************************************/
+
+/***********************************************************error******************************************************/
+
+.error-container {
+    position: absolute;
+    display: block;
+    width: 100%;
+    text-align: center;
+    top: 36%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+.error-container > img {
+    width: 180px;
+    transform: translateX(20px);
+    -webkit-transform: translateX(20px);
+}
+.error-container > .message {
+    color: #999;
+    font-size: 14px;
+    margin-top: 25px;
+}
+
+/***********************************************************error******************************************************/
