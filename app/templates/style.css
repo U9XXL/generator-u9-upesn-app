@@ -9,6 +9,10 @@
     .platform-preview .bar {
         background-image: none;
     }
+    .platform-preview [nav-bar-transition="ios"] [nav-bar="active"] .bar,
+    .platform-preview [nav-bar-transition="android"] [nav-bar="active"] .bar {
+        background-image: none;
+    }
 }
 
 /**********************************************************Common******************************************************/
