@@ -74,7 +74,7 @@ gulp.task('templatecache', () => {
         .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', 'www']));
+gulp.task('clean', del.bind(null, ['.tmp', 'www', 'www.zip']));
 
 gulp.task('serve', () => {
     runSequence(['clean', 'wiredep', 'lint'], () => {
@@ -142,6 +142,12 @@ gulp.task('yyesn', () => {
     return gulp.src('../yyesn.js').pipe(gulp.dest('www'));
 });
 
+gulp.task('zip', () => {
+    return gulp.src('www/**/*', { base: './www' })
+        .pipe($.zip('www.zip'))
+        .pipe(gulp.dest('./'));
+});
+
 gulp.task('default', () => {
     return new Promise(resolve => {
         runSequence(['clean', 'wiredep'], ['bowerfiles', 'appfiles'], 'wiredepdebug', resolve);
@@ -154,6 +160,6 @@ gulp.task('dist', () => {
         if (containYYesn) {
             batches.push('yyesn');
         }
-        runSequence(['clean', 'wiredep', 'templatecache'], batches, resolve);
+        runSequence(['clean', 'wiredep', 'templatecache'], batches, 'zip', resolve);
     });
 });
