@@ -29,12 +29,30 @@ gulp.task('html', () => {
         addRootSlash: false
     };
 
+    var jsFilter = $.filter('**/*.js', { restore: true });
+    var cssFilter = $.filter('**/*.css', { restore: true });
+    var htmlFilter = $.filter('*.html', { restore: true });
+
     return gulp.src('app/*.html')
         .pipe($.inject(partialsInjectFile, partialsInjectOptions))
         .pipe($.useref())
-        .pipe($.if('*.js', $.uglify()))
-        .pipe($.if('*.css', $.cssnano({ safe: true, autoprefixer: false })))
-        .pipe($.if('*.html', $.htmlmin({ collapseWhitespace: true })))
+        .pipe(jsFilter)
+        .pipe($.uglify())
+        .pipe($.rev())
+        .pipe(jsFilter.restore)
+        .pipe(cssFilter)
+        .pipe($.cssnano({ safe: true, autoprefixer: false }))
+        .pipe($.rev())
+        .pipe(cssFilter.restore)
+        .pipe($.revReplace())
+        .pipe(htmlFilter)
+        .pipe($.htmlmin({
+            removeEmptyAttributes: true,
+            removeAttributeQuotes: true,
+            collapseBooleanAttributes: true,
+            collapseWhitespace: true
+        }))
+        .pipe(htmlFilter.restore)
         .pipe(gulp.dest('www'));
 });
 
