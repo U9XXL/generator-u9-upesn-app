@@ -1,22 +1,17 @@
 
 angular.module('<%= appId %>', ['ionic', 'ionicU9Upesn'])
 
-.run(['$state', 'umobUser', function($state, umobUser) {
+.run(['$state', 'umobUser', 'umobJsBridge', function($state, umobUser, umobJsBridge) {
     umobUser.init.then(function() {
         return umobUser.checkLicense('<%= appId %>');
     }).then(function() {
         $state.go('home');
     }).finally(function() {
         if (window.yyesn) {
-            yyesn.client.hiddenMenu();
-            if (ionic.Platform.isIOS() || ionic.Platform.isIPad()) {
-                yyesn.client.configNavigationBar(function() {}, {
-                    navShow: '1',
-                    topOffSet: -20,
-                    statusBarStatus: 0,
-                    navColor: '#FFFFFF'
-                });
-            }
+            umobJsBridge.call('configNavBar', {
+                hide: 1,
+                statusBarStyle: 0
+            });
             ionic.requestAnimationFrame(function() {
                 document.body.classList.remove('platform-preview');
             });
